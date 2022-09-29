@@ -109,8 +109,6 @@ $keterangan =[
         else{
             $color = 'C4DDFF';
         }
-
-        //rumus2
         
         ?>
         <tr class='text-center' bgcolor="<?= $color ?>">
