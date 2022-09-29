@@ -21,11 +21,26 @@ $mhs8 = ['nim'=> '1220308', 'nama'=> 'Diajeng Maharani', 'nilai' => 30];
 $mhs9 = ['nim'=> '1220309', 'nama'=> 'Dimas Agusulisio', 'nilai' => 50];
 $mhs10 = ['nim'=> '122040', 'nama'=> 'Reyhan Mubarok', 'nilai' => 87];
 
-//array Asosiatif
+//array assosiative
 $mahasiswa =[$mhs1, $mhs2,$mhs3,$mhs4,$mhs5,$mhs6,$mhs7,$mhs8,$mhs9,$mhs10];
 
 $judul = ['No.','Nim','Nama','Nilai','Keterangan','Grade','Predikat'];
 
+// aggregat function in array 
+$jumlah_mhs = count($mahasiswa);
+$nilai = array_column($mahasiswa, 'nilai');
+$total_nilai = array_sum($nilai);
+$max_nilai = max($nilai);
+$min_nilai = min($nilai);
+$rata2 = $total_nilai/ $jumlah_mhs;
+
+//keterangan
+$keterangan =[
+    'Jumlah Mahasiswa'=> $jumlah_mhs, 
+    'Nilai Tertinggi' => $max_nilai, 
+    'Nilai Terendah' =>$min_nilai, 
+    'Nilai Rata rata' =>$rata2 
+    ];
 
 ?>
 <!doctype html>
@@ -37,11 +52,13 @@ $judul = ['No.','Nim','Nama','Nilai','Keterangan','Grade','Predikat'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   </head>
   <body>
-    <h3 class='py-4 text-center'>Daftar Nilai Mahasiswa</h3>
-    <div class="px-4 pt-3 table-responsive">
+    <div class="container px-5 my-4">   
+    <div class="alert alert-primary" role="alert">
+    <h4 align="center">DAFTAR NILAI MAHASISWA</h4>
+    </div>
     <table table class="table table-hover table-bordered">
     <thead>
-        <tr class='text-center' bgcolor='#FFA500'>
+        <tr class='text-center' bgcolor='#92B4EC'>
             <?php
             foreach($judul as $jdl){   
             ?>
@@ -87,12 +104,14 @@ $judul = ['No.','Nim','Nama','Nilai','Keterangan','Grade','Predikat'];
 
         //color
         if($no % 2 == 0){
-            $color = '#FCF3CF';
+            $color = '#D6E5FA';
         }
         else{
-            $color = '#FAC213';
+            $color = 'C4DDFF';
         }
 
+        //rumus2
+        
         ?>
         <tr class='text-center' bgcolor="<?= $color ?>">
             <td><?= $no++ ?></td>
@@ -106,6 +125,25 @@ $judul = ['No.','Nim','Nama','Nilai','Keterangan','Grade','Predikat'];
 
         <?php } ?>
     </tbody>
+    <tfoot>
+    <tr>
+        <th class='py-4 text-center' colspan="7"><h5>KETERANGAN</h5></th>
+    </tr>
+    <tr class='text-center' bgcolor='#92B4EC' >
+        <?php
+        foreach ($keterangan as $ket => $hasil){
+        ?>
+            <th colspan="2"><?= $ket ?></th>
+        <?php } ?>
+    </tr>
+    <tr class='text-center'>
+        <?php
+        foreach ($keterangan as $ket => $hasil){
+        ?>
+            <th colspan="2"><?= $hasil?></th>
+        <?php } ?>
+    </tr>
+    </tfoot>
 </table>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
